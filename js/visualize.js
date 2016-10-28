@@ -1,4 +1,4 @@
-const numberOfEle = 10;
+const numberOfEle = 100;
 
 var generateRandomNumberArray = function () {
     var numbers = [];
@@ -8,21 +8,13 @@ var generateRandomNumberArray = function () {
     return numbers;
 };
 
-var shiftOneValue = function(data){
-    data.shift();
-    data.push(_.random(1,100));
-    return data;
-};
 
 const WIDTH = 1300;
 const HEIGHT = 600;
 const MARGIN = 30;
 
-const barPadding = 100;
-const barMargin = 124;
-
 const INNER_WIDTH = WIDTH - 2 * MARGIN;
-const INNER_HEIGHT = HEIGHT - 2 * MARGIN;
+const INNER_HEIGHT = HEIGHT/5 - 2 * MARGIN;
 
 var translate = function(x, y){
     return "translate("+x+","+y+")";
@@ -33,8 +25,8 @@ var data = generateRandomNumberArray();
 
 var plotAxisAndGrid = function () {
     svg = d3.select('.container').append('svg')
-        .attr('width',WIDTH)
-        .attr('height',HEIGHT);
+        .attr('width',WIDTH/2)
+        .attr('height',HEIGHT/5);
 
     xScale = d3.scaleLinear()
         .domain([1,numberOfEle])
@@ -44,37 +36,6 @@ var plotAxisAndGrid = function () {
         .domain([0,100])
         .range([INNER_HEIGHT, 0]);
 
-    var g = svg.append('g')
-        .attr('transform',  translate(MARGIN, MARGIN));
-
-    var xAxis = d3.axisBottom(xScale).ticks(10);
-    var yAxis = d3.axisLeft(yScale).ticks(10);
-
-    svg.append('g')
-        .attr('transform', translate(MARGIN, HEIGHT - MARGIN))
-        .call(xAxis)
-        .classed('xAxis', true);
-
-    svg.selectAll('.xAxis .tick')
-        .append('line')
-        .attr('x1', 0.5)
-        .attr('y1', 0)
-        .attr('x2', 0)
-        .attr('y2', -INNER_HEIGHT)
-        .classed('grid', true);
-
-    svg.append('g')
-        .attr('transform', translate(MARGIN, MARGIN))
-        .classed('yAxis', true)
-        .call(yAxis);
-
-    svg.selectAll('.yAxis .tick')
-        .append('line')
-        .attr('x1', 0)
-        .attr('y1', 0.5)
-        .attr('x2', INNER_WIDTH)
-        .attr('y2', 0)
-        .classed('grid', true);
 };
 
 var loadLineChart = function () {
@@ -85,13 +46,11 @@ var loadLineChart = function () {
 
     var line = d3.line()
         .x(function(d,i){ return xScale(i+1)})
-        .y(function(d){return yScale(d)})
-        .curve(d3.curveBasis);
+        .y(function(d){return yScale(d)});
 
     var actualLine=d3.line()
         .x(function(d,i){ return xScale(i)})
-        .y(function(d){return yScale(d)})
-        .curve(d3.curveBasis);
+        .y(function(d){return yScale(d)});
 
     data.push(_.random(1,100));
 

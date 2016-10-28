@@ -11,8 +11,7 @@ h1 {
     stroke: steelblue;
     fill:none;
 }
+
 svg {
-    display:block;
-    border:solid;
-    margin-left: 55px;
+    border:solid 1px black;
 }
