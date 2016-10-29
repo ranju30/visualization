@@ -24,7 +24,7 @@ var loadChart = function () {
         .attr("class", "bar");
 
     d3.selectAll('.bar')
-        .style('width',function (d) { console.log(d); return (d*10)+'px';})
+        .style('width',function (d) { return (d*10)+'px';})
         .style('background-color',function(d,i){return blueColorScale(d/numberOfEle)})
         .text(function (d) {return d;});
 

@@ -24,7 +24,7 @@ var svg,xScale,yScale;
 var data = generateRandomNumberArray();
 
 var plotAxisAndGrid = function () {
-    svg = d3.select('.container').append('svg')
+    svg = d3.select('.line-container').append('svg')
         .attr('width',WIDTH/2)
         .attr('height',HEIGHT/5);
 
@@ -65,19 +65,19 @@ var loadLineChart = function () {
     data.shift();
 };
 
-var loadBarChart = function (svg) {
-    d3.select('.bar').remove();
-    var g = svg.append('g')
-        .classed('bar',true)
-        .attr('transform',  translate(MARGIN, MARGIN));
-};
+// var loadBarChart = function (svg) {
+//     d3.select('.bar').remove();
+//     var g = svg.append('g')
+//         .classed('bar',true)
+//         .attr('transform',  translate(MARGIN, MARGIN));
+// };
 
 window.onload = function () {
     var lineSVG = plotAxisAndGrid("line-container");
-    var barSVG = plotAxisAndGrid("bar-container");
+    // var barSVG = plotAxisAndGrid("bar-container");
 
     setInterval(function () {
         loadLineChart(lineSVG);
-        loadBarChart(barSVG);
+        // loadBarChart(barSVG);
     },500);
 };

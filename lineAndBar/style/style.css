@@ -1,0 +1,17 @@
+h1 {
+    color: lightgreen;
+    text-align: center;
+}
+
+.grid{
+    stroke: lightgray;
+}
+
+.line-chart{
+    stroke: steelblue;
+    fill:none;
+}
+
+svg {
+    border:solid 1px black;
+}
