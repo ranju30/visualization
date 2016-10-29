@@ -65,39 +65,19 @@ var loadLineChart = function () {
     data.shift();
 };
 
-// var loadBarChart = function () {
-//     d3.select('.bar').remove();
-//     var g = svg.append('g')
-//         .classed('bar',true)
-//         .attr('transform',  translate(MARGIN, MARGIN));
-//
-//
-//     svg.selectAll("rect")
-//         .data(data)
-//         .enter()
-//         .append("rect")
-//         .attr("x", function(d, i) {
-//             return (i+1) * barMargin;
-//         })
-//         .attr("y", function(d,i) {
-//             console.log(d,"----------",MARGIN - d);
-//             return MARGIN - d;
-//         })
-//         .attr("width", WIDTH / data.length - barPadding)
-//         .attr("height", function(d) {return (d*54)/10})
-//         .attr("fill", "teal");
-//
-//     data = shiftOneValue(data);
-// };
+var loadBarChart = function (svg) {
+    d3.select('.bar').remove();
+    var g = svg.append('g')
+        .classed('bar',true)
+        .attr('transform',  translate(MARGIN, MARGIN));
+};
 
 window.onload = function () {
-    plotAxisAndGrid();
-    // loadBarChart();
-    // loadLineChart();
-
+    var lineSVG = plotAxisAndGrid("line-container");
+    var barSVG = plotAxisAndGrid("bar-container");
 
     setInterval(function () {
-        loadLineChart();
-        // loadBarChart();
+        loadLineChart(lineSVG);
+        loadBarChart(barSVG);
     },500);
 };
