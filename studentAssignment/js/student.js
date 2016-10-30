@@ -13,34 +13,37 @@ var students = [
     {name: 'pokemon', subject: 'social studies', score: 32}
 ];
 
-var color = {};
-color['maths'] = '#2d5faf';
-color['english'] = '#ff8c00';
-color['kannada'] = '#04a50a';
-color['science'] = '#f70404';
-color['social studies'] = '#96046d';
-color['bengali'] = '#565042';
-color['tamil'] = '#b48bc1';
-color['sports'] = '#888988';
+function getUniqueSubject() {
+    return _.uniq(_.map(students,'subject'));
+}
+var getColor = function (subject) {
+    return d3.schemeCategory10[getUniqueSubject().indexOf(subject)];
+};
 
-var loadChart = function (data) {
+var loadChart = function () {
     var container = d3.select(".sequence-load").append('div').attr('class', 'bars');
-    var bars = container.selectAll('.bars').data(data);
+    var legends = d3.select(".legends").append('div').attr('class','subjects');
+
+    var bars = container.selectAll('.bars').data(students);
+    var subjectLegends = legends.selectAll('.subjects').data(getUniqueSubject());
 
     bars.enter()
         .append("div")
         .attr("class", "bar");
 
+    subjectLegends.enter()
+        .append('div')
+        .attr('class','subject');
+
     d3.selectAll('.bar')
-        .style('width', function (d) {
-            return (d.score * 10) + 'px';
-        })
-        .style('background-color', function (d) {
-            return color[d.subject];
-        })
-        .text(function (d) {
-            return d.name + " " + d.score;
-        });
+        .style('width', function (d) {return (d.score * 5) + 'px';})
+        .style('background-color', function (d) {return getColor(d.subject)})
+        .text(function (d) {return d.name + " " + d.score;});
+
+
+    d3.selectAll('.subject')
+        .style('background-color', function (d) {return getColor(d);})
+        .text(function (d) {return d;});
 };
 
 var sortData = function (sortBy) {
@@ -63,5 +66,5 @@ var loadScoreSortedChart = function () {
 
 
 window.onload = function () {
-    loadChart(students);
+    loadChart();
 };

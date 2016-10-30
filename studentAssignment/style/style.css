@@ -5,3 +5,22 @@
     padding-right: 5px;
     border-radius: 10px;
 }
+
+button {
+    border-radius: 10px;
+}
+
+.legends {
+    float: left;
+}
+
+.subjects {
+    float: right;
+}
+.subject {
+    width: 80px;
+    height: auto;
+    text-align: center;
+    border-radius: 10px;
+    float: left;
+}
