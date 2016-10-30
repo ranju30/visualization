@@ -46,24 +46,11 @@ var loadChart = function () {
         .text(function (d) {return d;});
 };
 
-var sortData = function (sortBy) {
+var loadChartSortedBy = function (key) {
     d3.selectAll('.bar').sort(function (a, b) {
-        return d3.ascending(a[sortBy], b[sortBy]);
+        return d3.ascending(a[key], b[key]);
     });
 };
-
-var loadNameSortedChart = function () {
-    sortData('name');
-};
-
-var loadSubjectSortedChart = function () {
-  sortData('subject');
-};
-
-var loadScoreSortedChart = function () {
-    sortData('score');
-};
-
 
 window.onload = function () {
     loadChart();
