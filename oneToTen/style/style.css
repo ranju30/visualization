@@ -1,0 +1,12 @@
+.title-container {
+    float: left;
+}
+
+.titles {
+    float: right;
+}
+
+.title {
+    float: left;
+    width: 30px;
+}

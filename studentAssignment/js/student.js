@@ -13,19 +13,18 @@ var students = [
     {name: 'pokemon', subject: 'social studies', score: 32}
 ];
 
-function getUniqueSubject() {
+var subjects = function getUniqueSubject() {
     return _.uniq(_.map(students,'subject'));
-}
-var getColor = function (subject) {
-    return d3.schemeCategory10[getUniqueSubject().indexOf(subject)];
-};
+}();
+
+var colors = d3.scaleOrdinal(d3.schemeCategory10).domain(subjects);
 
 var loadChart = function () {
     var container = d3.select(".sequence-load").append('div').attr('class', 'bars');
     var legends = d3.select(".legends").append('div').attr('class','subjects');
 
     var bars = container.selectAll('.bars').data(students);
-    var subjectLegends = legends.selectAll('.subjects').data(getUniqueSubject());
+    var subjectLegends = legends.selectAll('.subjects').data(subjects);
 
     bars.enter()
         .append("div")
@@ -37,12 +36,12 @@ var loadChart = function () {
 
     d3.selectAll('.bar')
         .style('width', function (d) {return (d.score * 5) + 'px';})
-        .style('background-color', function (d) {return getColor(d.subject)})
+        .style('background-color', function (d) {return colors(d.subject)})
         .text(function (d) {return d.name + " " + d.score;});
 
 
     d3.selectAll('.subject')
-        .style('background-color', function (d) {return getColor(d);})
+        .style('background-color', function (d) {return colors(d);})
         .text(function (d) {return d;});
 };
 
