@@ -1,4 +1,9 @@
-td {
-    border: 1px solid;
-    font-style: italic;
+.number {
+    border: 1px solid lightgrey;
+    float : left;
+    margin : 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+
+
 }
