@@ -4,7 +4,8 @@ const padding = 50,
 var shapeSvg = function() {
     return d3.select('.container').append('svg')
         .attr('height', size)
-        .attr('width', size);
+        .attr('width', size)
+        .style('padding',padding/2);
 };
 
 var createLine = function() {
@@ -19,8 +20,8 @@ var createLine = function() {
 var createCircle = function() {
     var svg = shapeSvg();
     svg.append('circle')
-        .attr('cx', padding)
-        .attr('cy', padding)
+        .attr('cx', size/2)
+        .attr('cy', size/2)
         .attr('r', size / 2);
 };
 
@@ -37,14 +38,14 @@ var createTriangle = function() {
     var svg = shapeSvg();
 
     svg.append('polygon')
-        .attr('points', padding + ',0 0,' + size + ' ' + size + ',' + size)
-}
+        .attr('points', size/2 + ',0 0,' + size + ' ' + size + ',' + size)
+};
 
 var visualize = function() {
-    createLine();
-    createCircle();
-    createRect();
-    createTriangle();
+  const showTable = [createLine,createCircle,createRect,createTriangle];
+  showTable.forEach(function(createShape){
+    createShape();
+  });
 }
 
 window.onload = visualize;

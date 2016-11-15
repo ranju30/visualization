@@ -19,9 +19,3 @@ polygon {
   fill:none;
   stroke:green;
 }
-
-.container {
-  border-style: groove;
-  height: 150px;
-  width: 600px;
-}
