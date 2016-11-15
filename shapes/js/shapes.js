@@ -2,10 +2,10 @@ const padding = 50,
     size = 100,
     border_radious = 10;
 var svg;
-var svgShape = function(svgSize) {
+var svgShape = function(width) {
     return d3.select('.container').append('svg')
-        .attr('height', svgSize)
-        .attr('width', svgSize)
+        .attr('height', size)
+        .attr('width', width)
         .style('padding', padding / 2);
 };
 
