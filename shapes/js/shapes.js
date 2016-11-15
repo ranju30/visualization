@@ -1,11 +1,12 @@
 const padding = 50,
-    size = 100;
+    size = 100,
+    border_radious = 10;
 var shapeSvg = function() {
     return d3.select('.container').append('svg')
         .attr('height', size)
         .attr('width', size)
-        .style('padding', padding/2);
-}
+        .style('padding', padding / 2);
+};
 
 var createLine = function() {
     var svg = shapeSvg();
@@ -19,25 +20,25 @@ var createLine = function() {
 var createCircle = function() {
     var svg = shapeSvg();
     svg.append('circle')
-    .attr('cx',padding)
-    .attr('cy',padding)
-    .attr('r',size/2);
+        .attr('cx', padding)
+        .attr('cy', padding)
+        .attr('r', size / 2);
 };
 
-var createRect = function(){
-  var svg = shapeSvg();
-  svg.append('rect')
-  .attr('width',size)
-  .attr('height',size)
-  .attr('rx',10)
-  .attr('ry',10);
+var createRect = function() {
+    var svg = shapeSvg();
+    svg.append('rect')
+        .attr('width', size)
+        .attr('height', size)
+        .attr('rx', border_radious)
+        .attr('ry', border_radious);
 }
 
-var createTriangle = function(){
-  var svg = shapeSvg();
+var createTriangle = function() {
+    var svg = shapeSvg();
 
-  svg.append('polygon')
-  .attr('points',padding+',0 0,'+size+' '+size+','+size)
+    svg.append('polygon')
+        .attr('points', padding + ',0 0,' + size + ' ' + size + ',' + size)
 }
 
 var visualize = function() {
