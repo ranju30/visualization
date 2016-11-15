@@ -4,8 +4,7 @@ const padding = 50,
 var shapeSvg = function() {
     return d3.select('.container').append('svg')
         .attr('height', size)
-        .attr('width', size)
-        .style('padding', padding / 2);
+        .attr('width', size);
 };
 
 var createLine = function() {
