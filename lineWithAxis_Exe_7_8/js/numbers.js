@@ -43,7 +43,7 @@ var sinLine = d3.line()
     })
     .y(function(d, i) {
         return yScale(d / 10 + 0.5);
-    })
+    });
 
 var visualize = function() {
     var svg = d3.select('.container').append('svg')
@@ -58,19 +58,46 @@ var visualize = function() {
         .attr('transform', translate(MARGIN, MARGIN))
         .call(yAxis);
 
-    var gLine = svg.append('g')
+    var g = svg.append('g')
         .attr('transform', translate(MARGIN, MARGIN));
 
-    gLine.append("path")
+    g.append("path")
         .attr('class', 'line')
         .attr("d", line(data));
 
-    var gSin = svg.append('g')
-        .attr('transform', translate(MARGIN, MARGIN));
-
-    gSin.append("path")
+    g.append("path")
         .attr('class', 'line')
         .attr("d", sinLine(getSinValue(10)));
+
+    g.selectAll('circle').data(data, function(d, i) {
+            return d;
+        })
+        .enter().append('circle')
+        .attr('r', 5)
+        .attr('class', 'lineCircle');
+
+    g.selectAll('.lineCircle').attr('cx', function(d) {
+            return xScale(d.x / 10)
+        })
+        .attr('cy', function(d) {
+            return yScale(d.y / 10)
+        });
+
+    g.selectAll('circle').data(getSinValue(10), function(d, i) {
+            return d;
+        })
+        .enter().append('circle')
+        .attr('r', 5)
+        .attr('class', 'sinCircle');
+
+    g.selectAll('.sinCircle')
+        .attr('cx', function(d, i) {
+            return xScale(i / 10)
+        })
+        .attr('cy', function(d, i) {
+            return yScale(d / 10 + 0.5)
+        });
+
 };
 
 window.onload = visualize;
