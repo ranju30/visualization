@@ -1,0 +1,17 @@
+/*.line {
+    stroke: maroon;
+    stroke-width: 2px;
+    fill: none;
+}*/
+
+.sinLine{
+  stroke: steelblue;
+  stroke-width: 2px;
+  fill: none;
+}
+
+circle {
+    stroke: steelblue;
+    stroke-width: 1px;
+    fill: white;
+}
