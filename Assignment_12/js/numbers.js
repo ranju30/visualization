@@ -12,6 +12,20 @@ var getSinValue = function(limit) {
     return storage;
 }
 
+var curveArray = [
+    {"d3Curve": d3.curveLinearClosed},
+    {"d3Curve": d3.curveStepAfter},
+    {"d3Curve": d3.curveBasisOpen},
+    {"d3Curve": d3.curveCardinalClosed},
+    {"d3Curve": d3.curveBasis}
+];
+
+var loadChart = function () {
+    curveArray.forEach(function (eachCurve) {
+        visualize(eachCurve);
+    });
+};
+
 var xScale = d3.scaleLinear()
     .domain([0, 1])
     .range([0, SCALERANGE]);
@@ -46,7 +60,18 @@ var visualize = function(curveType) {
         })
         .y(function(d, i) {
             return yScale(d / 10);
-        });
+        })
+        .curve(curveType.d3Curve);
+
+    var area = d3.area()
+        .x(function(d, i) {
+            return xScale(i / 10)
+        })
+        .y0(SCALERANGE)
+        .y1(function(d, i) {
+            return yScale(d / 10)
+        })
+        .curve(curveType.d3Curve);
 
     var g = svg.append('g')
         .attr('transform', translate(MARGIN, MARGIN));
@@ -70,19 +95,10 @@ var visualize = function(curveType) {
             return yScale(d / 10)
         });
 
-    var area = d3.area()
-        .x(function(d, i) {
-            return xScale(i / 10)
-        })
-        .y0(SCALERANGE)
-        .y1(function(d, i) {
-            return yScale(d / 10)
-        });
-
     g.append("path")
         .attr('class', 'area')
         .attr("d", area(getSinValue(10)));
 
 };
 
-window.onload = visualize;
+window.onload = loadChart;
