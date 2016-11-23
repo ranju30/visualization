@@ -11,11 +11,31 @@ var translate = function(x, y) {
     return 'translate(' + x + ',' + y + ')';
 };
 
-var visualize = function(curveType) {
-    var pie = d3.pie().sort(null)(data);
+var getPieForFullCircle = function(){
+  return d3.pie().sort(null)(data);
+}
+
+var getInnerRadiusForFullCircle = function(){
+  return 0;
+}
+
+//--------------------------------------------------------------------------
+
+var getPieForHalfCircle = function(){
+  return d3.pie().startAngle(0).endAngle(180*(Math.PI/180)).sort(null)(data);
+}
+
+var getInnerRadiusForHalfCircle = function(){
+  return 0;
+}
+
+//---------------------------------------------------------------------------
+
+var visualize = function() {
+    var pie = getPieForFullCircle();
 
     var arc = d3.arc()
-        .innerRadius(0)
+        .innerRadius(getInnerRadiusForFullCircle())
         .outerRadius(piRadius);
 
     var svg = d3.select('.container').append('svg')
