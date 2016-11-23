@@ -21,7 +21,7 @@ var getInnerRadiusForFullCircle = function(){
   return 0;
 }
 
-//----------------------------------15----------------------------------------
+//----------------------------------15-----------------------------------------
 
 var getPieForHalfCircle = function(){
   return d3.pie().startAngle(0).endAngle(180*(Math.PI/180)).sort(null)(data);
@@ -41,12 +41,23 @@ var getInnerRadiusForFullCircleWithBlank = function(){
   return 100;
 };
 
+//---------------------------------17------------------------------------------
+
+var getPieForHalfCircleWithBlank = function(){
+  return d3.pie().startAngle(0).endAngle(180*(Math.PI/180)).sort(null)(data);
+}
+
+var getInnerRadiusForHalfCircleWithBlank = function(){
+  return 100;
+}
+
+//-----------------------------------------------------------------------------
 
 var visualize = function() {
-    var pie = getPieForFullCircleWithBlank();
+    var pie = getPieForHalfCircleWithBlank();
 
     var arc = d3.arc()
-        .innerRadius(getInnerRadiusForFullCircleWithBlank())
+        .innerRadius(getInnerRadiusForHalfCircleWithBlank())
         .outerRadius(piRadius);
 
     var svg = d3.select('.container').append('svg')
