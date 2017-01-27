@@ -1,0 +1,15 @@
+button {
+    border-radius: 15px;
+}
+
+.adeyaad {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1px;
+}
+
+.glow {
+    fill: none;
+    stroke-width: 2px;
+    stroke: red;
+}
